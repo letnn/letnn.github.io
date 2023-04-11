@@ -4,7 +4,6 @@
 
 <head>
     <title>loading</title>
-    <script src="jquery-3.2.1.min.js"></script>
 </head>
 <body style="text-align: center;">
     <div id="msg"></div>
@@ -18,15 +17,25 @@
         uid = uid.replace("/", "");
         uid = uid.replace("%2F", "");
 
-        $(function() {
-            $.get(siteurl + "api/index/get/key/" + uid, null, function(res) {
-                if (res.code == 200) {
-                    location.href = res.url;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            console.log(xhr);
+            if (xhr.readyState === 4) {
+                if(xhr.status === 200){
+                    var result = JSON.parse(xhr.responseText);
+                    console.log(result);
+                    if (result.code == 3) {
+                        location.href = result.url;
+                    } else {
+                        document.getElementById("msg").innerHTML = result.msg;
+                    }
                 } else {
-                    $("#msg").text(res.msg);
-                }
-            }, "json");
-        });
+                    document.getElementById("msg").innerHTML = "服务器错误";
+                }   
+            }
+        };
+        xhr.open("GET", siteurl + "api/index/get/key/" + uid, true);
+        xhr.send();
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

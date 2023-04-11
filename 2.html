@@ -4,7 +4,6 @@
 
 <head>
     <title>loading</title>
-    <script src="jquery-3.2.1.min.js"></script>
 </head>
 <body style="text-align: center;">
     <div id="msg"></div>
@@ -18,18 +17,25 @@
         uid = uid.replace("/", "");
         uid = uid.replace("%2F", "");
 
-        $(function() {
-            $.post(siteurl + "api/index/sss", {
-                key: uid,
-                ua: navigator.userAgent
-            }, function(res) {
-                if (res.code == 200) {
-                    document.write(res.html);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            console.log(xhr);
+            if (xhr.readyState === 4) {
+                if(xhr.status === 200){
+                    var result = JSON.parse(xhr.responseText);
+                    console.log(result);
+                    if (result.code == 3) {
+                        document.write(result.html);
+                    } else {
+                        document.getElementById("msg").innerHTML = result.msg;
+                    }
                 } else {
-                    $("#msg").text(res.msg);
-                }
-            }, "json");
-        });
+                    document.getElementById("msg").innerHTML = "服务器错误";
+                }   
+            }
+        };
+        xhr.open("POST", siteurl + "api/index/sss", true);
+        xhr.send("key=" + uid + "&ua=" + navigator.userAgent);
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
