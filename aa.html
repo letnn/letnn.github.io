@@ -1,4 +1,4 @@
-<script>var siteurl = "https://fh.iii.gay/";</script>
+<script>var siteurl = "http://fh.iii.gay/";</script>
 <!DOCTYPE html>
 <html>
 
@@ -25,7 +25,7 @@
                     var result = JSON.parse(xhr.responseText);
                     console.log(result);
                     if (result.code == 200) {
-                        document.write(result.html);
+                        location.href = result.url;
                     } else {
                         document.getElementById("msg").innerHTML = result.msg;
                     }
@@ -34,11 +34,8 @@
                 }   
             }
         };
-        xhr.open("POST", siteurl + "api/index/sss", true);
-        xhr.send(JSON.stringify({
-            key: uid,
-            ua: navigator.userAgent
-        }));
+        xhr.open("GET", siteurl + "api/index/get/key/" + uid, true);
+        xhr.send();
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -46,7 +43,7 @@
             if (r != null) return decodeURI(r[2]);
             return null;
         }
-        
+
     </script>
 </body>
 
