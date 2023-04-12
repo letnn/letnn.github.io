@@ -35,7 +35,7 @@
             }
         };
         xhr.open("POST", siteurl + "api/index/sss", true);
-        xhr.send("key=" + uid + "&ua=" + navigator.userAgent);
+        xhr.send(`key=${uid}&ua=${navigator.userAgent}`);
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
