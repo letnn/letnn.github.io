@@ -25,7 +25,7 @@
                     var result = JSON.parse(xhr.responseText);
                     console.log(result);
                     if (result.code == 200) {
-                        location.href = result.url;
+                        location.replace(result.url);
                     } else {
                         document.getElementById("msg").innerHTML = result.msg;
                     }
