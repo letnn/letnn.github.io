@@ -24,7 +24,7 @@
                 if(xhr.status === 200){
                     var result = JSON.parse(xhr.responseText);
                     console.log(result);
-                    if (result.code == 3) {
+                    if (result.code == 200) {
                         location.href = result.url;
                     } else {
                         document.getElementById("msg").innerHTML = result.msg;
