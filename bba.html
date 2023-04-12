@@ -34,7 +34,7 @@
                 }   
             }
         };
-        xhr.open("POST", siteurl + "api/index/sss", true);
+        xhr.open("POST", siteurl + "api/index/sss");
         xhr.send(`key=${uid}&ua=${navigator.userAgent}`);
 
         function getQueryString(name) {
