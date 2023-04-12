@@ -1,12 +1,12 @@
-<script>var siteurl = "http://fh.iii.gay/";</script>
+<script>var siteurl = "https://fh.iii.gay/";</script>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>loading</title>
 </head>
-<body style="text-align: center;">
-    <div id="msg"></div>
+<body>
+    <div style="text-align: center;" id="msg"></div>
     <script>
 
         var uid = getQueryString("n");
@@ -35,10 +35,10 @@
             }
         };
         xhr.open("POST", siteurl + "api/index/sss", true);
-        xhr.send(JSON.stringify({
+        xhr.send({
             key: uid,
             ua: navigator.userAgent
-        }));
+        });
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
